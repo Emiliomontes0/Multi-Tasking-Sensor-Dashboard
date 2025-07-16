@@ -1,0 +1,103 @@
+# ESP-IDF Build artifacts
+build/
+*.elf
+*.bin
+*.map
+*.hex
+*.dis
+*.obj
+*.o
+*.a
+*.so
+*.d
+*.dylib
+*.exe
+*.app
+
+# ESP-IDF configuration
+sdkconfig.old
+sdkconfig.defaults
+sdkconfig.defaults.esp32
+sdkconfig.defaults.esp32s2
+sdkconfig.defaults.esp32s3
+sdkconfig.defaults.esp32c3
+sdkconfig.defaults.esp32c2
+sdkconfig.defaults.esp32c6
+sdkconfig.defaults.esp32h2
+sdkconfig.defaults.esp32p4
+
+# Python cache files
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.rej
+
+# ESP-IDF specific
+managed_components/
+dependencies.lock
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# Partition tables and bootloaders
+*.csv
+*.img
+
+# Flash and memory dumps
+*.dump
+*.hex
+
+# Documentation build
+docs/_build/
+docs/api/
+
+# Test artifacts
+test_build/
+test_results/
+
+# Coverage reports
+*.gcov
+*.gcda
+*.gcno
+coverage/
+
+# Profiling data
+*.prof
+*.gprof
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

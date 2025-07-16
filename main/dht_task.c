@@ -148,22 +148,39 @@ void dht_task(void *pvParameter) {
             float temperature_fahrenheit = (temperature_celsius * 9.0f / 5.0f) + 32.0f;
             float humidity = (float)data.humidity_int + (float)data.humidity_dec / 10.0f;
             
-            // Update shared sensor data
-            sensor_data.temperature_celsius = temperature_celsius;
-            sensor_data.temperature_fahrenheit = temperature_fahrenheit;
-            sensor_data.humidity = humidity;
-            sensor_data.temperature_valid = true;
-            sensor_data.humidity_valid = true;
+            // Create temperature/humidity message
+            temp_humidity_msg_t temp_humidity_msg = {
+                .type = SENSOR_MSG_TEMPERATURE_HUMIDITY,
+                .temperature_celsius = temperature_celsius,
+                .temperature_fahrenheit = temperature_fahrenheit,
+                .humidity = humidity,
+                .temperature_valid = true,
+                .humidity_valid = true,
+                .timestamp = xTaskGetTickCount() * portTICK_PERIOD_MS
+            };
             
-            // Update dashboard
-            update_dashboard();
-            
-            printf("[DHT Task] Success! Temperature: %.1f°C (%.1f°F), Humidity: %.1f%% (Success rate: %d/%d)\n", 
-                   temperature_celsius, temperature_fahrenheit, humidity, success_count, total_attempts);
+            // Send data to queue
+            if (xQueueSend(temp_humidity_queue, &temp_humidity_msg, pdMS_TO_TICKS(100)) == pdTRUE) {
+                printf("[DHT Task] Success! Temperature: %.1f°C (%.1f°F), Humidity: %.1f%% (Success rate: %d/%d)\n", 
+                       temperature_celsius, temperature_fahrenheit, humidity, success_count, total_attempts);
+            } else {
+                printf("[DHT Task] Failed to send data (queue full) (Success rate: %d/%d)\n", 
+                       success_count, total_attempts);
+            }
         } else {
-            // Mark data as invalid on failure
-            sensor_data.temperature_valid = false;
-            sensor_data.humidity_valid = false;
+            // Create invalid data message
+            temp_humidity_msg_t temp_humidity_msg = {
+                .type = SENSOR_MSG_TEMPERATURE_HUMIDITY,
+                .temperature_celsius = 0.0f,
+                .temperature_fahrenheit = 0.0f,
+                .humidity = 0.0f,
+                .temperature_valid = false,
+                .humidity_valid = false,
+                .timestamp = xTaskGetTickCount() * portTICK_PERIOD_MS
+            };
+            
+            // Send invalid data to queue
+            xQueueSend(temp_humidity_queue, &temp_humidity_msg, pdMS_TO_TICKS(100));
             
             printf("[DHT Task] Failed to read DHT11 sensor (Success rate: %d/%d)\n", 
                    success_count, total_attempts);

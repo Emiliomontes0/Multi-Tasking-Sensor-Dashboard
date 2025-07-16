@@ -7,24 +7,40 @@ This project implements a **real-time environmental sensor dashboard** using Fre
 - **ESP32 FreeRTOS Multi-Tasking**
 - **ADC Integration:** Light Level Sensor (LDR)
 - **Digital Sensor Integration:** DHT11 Temperature & Humidity Sensor
-- **Global Shared Data Structure for Sensor State**
+- **FreeRTOS Queue-Based Communication** (Professional RTOS Design)
+- **Dedicated Logger Task** for Dashboard Output
 - **Formatted UART Dashboard with ANSI Clear Screen**
 - **Real-Time Sensor Updates with Task Scheduling**
 
 ## 📂 Project Structure
 ```
 main/
-├── app_main.c        // Initializes tasks
-├── adc_task.c/.h     // LDR ADC readings, updates shared data
-├── dht_task.c/.h     // DHT11 sensor, updates shared data
-├── sensor_data.c/.h  // Shared global data, dashboard formatting
+├── app_main.c        // Initializes queues and tasks
+├── adc_task.c/.h     // LDR ADC readings, sends to queue
+├── dht_task.c/.h     // DHT11 sensor, sends to queue
+├── sensor_data.c/.h  // Queue management, logger task, dashboard
 ├── CMakeLists.txt    // ESP-IDF build config
 ```
+
+## Architecture Overview
+
+### **Queue-Based Communication**
+- **Light Queue**: ADC task → Logger task
+- **Temperature/Humidity Queue**: DHT11 task → Logger task
+- **No Global Variables**: Professional RTOS design pattern
+
+### **Task Responsibilities**
+| Task | Priority | Responsibility |
+|------|----------|----------------|
+| `adc_task` | 5 | Reads LDR sensor, sends to light queue |
+| `dht_task` | 5 | Reads DHT11 sensor, sends to temp/humidity queue |
+| `logger_task` | 3 | Receives from queues, updates dashboard |
 
 ## Example UART Output (Simulated LCD):
 ```
 ---------------------------
 [ Sensor Dashboard ]
+Timestamp: 12345 ms
 Light Level (ADC): 3410
 Temperature: 24.5°C / 76.1°F
 Humidity: 47.0%
@@ -41,16 +57,17 @@ Humidity: 47.0%
 ## Software Stack
 - **ESP-IDF v5.x+**
 - **FreeRTOS (built-in with ESP-IDF)**
+- **FreeRTOS Queues** for inter-task communication
 - **ADC One-Shot Driver (ESP-IDF)**
 - **GPIO Input Handling (ESP-IDF)**
 - **UART0 Serial Output (USB to PC Terminal)**
 
-## 🧑‍💻 How It Works
+## How It Works
 | Task      | Interval | Action               |
 |-----------|----------|-----------------------|
-| `adc_task`| 1 second | Reads ADC (LDR), updates dashboard |
-| `dht_task`| 3 seconds | Reads DHT11, updates dashboard |
-| `sensor_data` | Anytime | Holds current sensor state, clears screen, redraws |
+| `adc_task`| 1 second | Reads ADC (LDR), sends to light queue |
+| `dht_task`| 3 seconds | Reads DHT11, sends to temp/humidity queue |
+| `logger_task` | 100ms | Receives from queues, updates dashboard |
 
 ## Build & Flash
 Ensure `idf.py` environment is set up properly.
@@ -61,17 +78,20 @@ idf.py -p /dev/cu.usbserial-110 flash monitor
 ```
 
 ## Skills Demonstrated
- FreeRTOS Task Scheduling  
- Inter-task Data Sharing  
- UART Output Formatting  
- ADC Peripheral Usage  
- GPIO Input for Digital Sensors  
- Real-Time Embedded Systems
+- **FreeRTOS Task Scheduling**
+- **FreeRTOS Queue Communication**
+- **Inter-task Data Sharing (Professional Pattern)**
+- **UART Output Formatting**
+- **ADC Peripheral Usage**
+- **GPIO Input for Digital Sensors**
+- **Real-Time Embedded Systems**
+- **RTOS Architecture Design**
 
 ## Potential Extensions
 - BLE Environmental Beacon for Mobile Apps
 - SD Card Logging (CSV)
 - Wi-Fi Cloud Telemetry (MQTT / HTTP)
 - Low-Power Optimization (Sleep Modes)
-- FreeRTOS Queues / Notifications
+- FreeRTOS Notifications for Event-Driven Updates
+- Multiple Sensor Support with Queue Prioritization
 
