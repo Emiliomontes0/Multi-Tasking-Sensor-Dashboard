@@ -9,8 +9,10 @@
 #define DHT_PIN GPIO_NUM_25
 #define DHT_TIMEOUT_US 1000
 #define DHT_SAMPLE_PERIOD_MS 3000
+#define DHT_RETRY_COUNT 3
+#define DHT_RETRY_DELAY_MS 100
 
-// DHT11 timing constants (microseconds)
+// DHT11 timing constants (microseconds) - more tolerant values
 #define DHT_START_SIGNAL_LOW_US 18000
 #define DHT_START_SIGNAL_HIGH_US 40
 #define DHT_RESPONSE_LOW_US 80
@@ -18,6 +20,10 @@
 #define DHT_DATA_BIT_LOW_US 50
 #define DHT_DATA_BIT_HIGH_0_US 26
 #define DHT_DATA_BIT_HIGH_1_US 70
+
+// More tolerant timeout values
+#define DHT_RESPONSE_TIMEOUT_US 150
+#define DHT_DATA_TIMEOUT_US 150
 
 typedef struct {
     uint8_t humidity_int;
@@ -51,7 +57,7 @@ static bool dht11_read_data(dht11_data_t *data) {
     // Wait for response (sensor pulls low)
     int64_t start_time = esp_timer_get_time();
     while (gpio_get_level(DHT_PIN) == 1) {
-        if (esp_timer_get_time() - start_time > 100) {
+        if (esp_timer_get_time() - start_time > DHT_RESPONSE_TIMEOUT_US) {
             printf("[DHT] No response from sensor\n");
             return false;
         }
@@ -60,7 +66,7 @@ static bool dht11_read_data(dht11_data_t *data) {
     // Wait for response low to end
     start_time = esp_timer_get_time();
     while (gpio_get_level(DHT_PIN) == 0) {
-        if (esp_timer_get_time() - start_time > 100) {
+        if (esp_timer_get_time() - start_time > DHT_RESPONSE_TIMEOUT_US) {
             printf("[DHT] Response low timeout\n");
             return false;
         }
@@ -69,7 +75,7 @@ static bool dht11_read_data(dht11_data_t *data) {
     // Wait for response high to end
     start_time = esp_timer_get_time();
     while (gpio_get_level(DHT_PIN) == 1) {
-        if (esp_timer_get_time() - start_time > 100) {
+        if (esp_timer_get_time() - start_time > DHT_RESPONSE_TIMEOUT_US) {
             printf("[DHT] Response high timeout\n");
             return false;
         }
@@ -81,7 +87,7 @@ static bool dht11_read_data(dht11_data_t *data) {
             // Wait for data bit low
             start_time = esp_timer_get_time();
             while (gpio_get_level(DHT_PIN) == 0) {
-                if (esp_timer_get_time() - start_time > 100) {
+                if (esp_timer_get_time() - start_time > DHT_DATA_TIMEOUT_US) {
                     printf("[DHT] Data bit low timeout\n");
                     return false;
                 }
@@ -90,7 +96,7 @@ static bool dht11_read_data(dht11_data_t *data) {
             // Measure high time to determine bit value
             start_time = esp_timer_get_time();
             while (gpio_get_level(DHT_PIN) == 1) {
-                if (esp_timer_get_time() - start_time > 100) {
+                if (esp_timer_get_time() - start_time > DHT_DATA_TIMEOUT_US) {
                     printf("[DHT] Data bit high timeout\n");
                     return false;
                 }
@@ -110,6 +116,12 @@ static bool dht11_read_data(dht11_data_t *data) {
         return false;
     }
     
+    // Validate data ranges (DHT11 specifications)
+    if (buffer[0] > 100 || buffer[2] > 50) {
+        printf("[DHT] Data out of range: humidity=%d, temp=%d\n", buffer[0], buffer[2]);
+        return false;
+    }
+    
     // Parse data
     data->humidity_int = buffer[0];
     data->humidity_dec = buffer[1];
@@ -118,6 +130,20 @@ static bool dht11_read_data(dht11_data_t *data) {
     data->checksum = buffer[4];
     
     return true;
+}
+
+static bool dht11_read_with_retry(dht11_data_t *data) {
+    for (int retry = 0; retry < DHT_RETRY_COUNT; retry++) {
+        if (dht11_read_data(data)) {
+            return true;
+        }
+        
+        if (retry < DHT_RETRY_COUNT - 1) {
+            printf("[DHT] Retry %d/%d after %dms delay\n", retry + 1, DHT_RETRY_COUNT, DHT_RETRY_DELAY_MS);
+            vTaskDelay(pdMS_TO_TICKS(DHT_RETRY_DELAY_MS));
+        }
+    }
+    return false;
 }
 
 void dht_task(void *pvParameter) {
@@ -132,8 +158,8 @@ void dht_task(void *pvParameter) {
     gpio_config(&io_conf);
 
     printf("[DHT Task] Starting DHT11 sensor on GPIO %d\n", DHT_PIN);
-    printf("[DHT Task] Waiting 2 seconds for sensor to stabilize...\n");
-    vTaskDelay(pdMS_TO_TICKS(2000));
+    printf("[DHT Task] Waiting 3 seconds for sensor to stabilize...\n");
+    vTaskDelay(pdMS_TO_TICKS(3000)); // Longer stabilization time
     
     int success_count = 0;
     int total_attempts = 0;
@@ -142,7 +168,7 @@ void dht_task(void *pvParameter) {
         total_attempts++;
         dht11_data_t data;
         
-        if (dht11_read_data(&data)) {
+        if (dht11_read_with_retry(&data)) {
             success_count++;
             float temperature_celsius = (float)data.temperature_int + (float)data.temperature_dec / 10.0f;
             float temperature_fahrenheit = (temperature_celsius * 9.0f / 5.0f) + 32.0f;
@@ -182,8 +208,8 @@ void dht_task(void *pvParameter) {
             // Send invalid data to queue
             xQueueSend(temp_humidity_queue, &temp_humidity_msg, pdMS_TO_TICKS(100));
             
-            printf("[DHT Task] Failed to read DHT11 sensor (Success rate: %d/%d)\n", 
-                   success_count, total_attempts);
+            printf("[DHT Task] Failed to read DHT11 sensor after %d retries (Success rate: %d/%d)\n", 
+                   DHT_RETRY_COUNT, success_count, total_attempts);
         }
         
         vTaskDelay(pdMS_TO_TICKS(DHT_SAMPLE_PERIOD_MS));
