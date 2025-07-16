@@ -1,0 +1,711 @@
+Command: /Users/emiliomontes/.espressif/python_env/idf6.0_py3.13_env/bin/python /Users/emiliomontes/esp/esp-idf/tools/idf_monitor.py -p /dev/cu.usbserial-110 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 /Users/emiliomontes/Desktop/Rtos/test_project/build/test_project.elf /Users/emiliomontes/Desktop/Rtos/test_project/build/bootloader/bootloader.elf -m '/Users/emiliomontes/.espressif/python_env/idf6.0_py3.13_env/bin/python' '/Users/emiliomontes/esp/esp-idf/tools/idf.py' '-p' '/dev/cu.usbserial-110'
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x1b (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6372
+load:0x40078000,len:15928
+load:0x40080400,len:3880
+entry 0x40080638
+[0;32mI (27) boot: ESP-IDF v6.0-dev-1002-gbfe5caf58f 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time Jul 16 2025 09:47:24[0m
+[0;32mI (28) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v3.1[0m
+[0;32mI (33) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (37) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (40) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (57) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (80) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=0a2a4h ( 41636) map[0m
+[0;32mI (103) esp_image: segment 1: paddr=0001a2cc vaddr=3ff80000 size=00024h (    36) load[0m
+[0;32mI (103) esp_image: segment 2: paddr=0001a2f8 vaddr=3ffb0000 size=02600h (  9728) load[0m
+[0;32mI (110) esp_image: segment 3: paddr=0001c900 vaddr=40080000 size=03718h ( 14104) load[0m
+[0;32mI (120) esp_image: segment 4: paddr=00020020 vaddr=400d0020 size=11840h ( 71744) map[0m
+[0;32mI (147) esp_image: segment 5: paddr=00031868 vaddr=40083718 size=098a0h ( 39072) load[0m
+[0;32mI (170) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (170) boot: Disabling RNG early entropy source...[0m
+[0;32mI (180) cpu_start: Multicore app[0m
+[0;32mI (189) cpu_start: Pro cpu start user code[0m
+[0;32mI (189) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (189) app_init: Application information:[0m
+[0;32mI (189) app_init: Project name:     test_project[0m
+[0;32mI (193) app_init: App version:      1[0m
+[0;32mI (197) app_init: Compile time:     Jul 16 2025 09:47:45[0m
+[0;32mI (202) app_init: ELF file SHA256:  852690657...[0m
+[0;32mI (206) app_init: ESP-IDF:          v6.0-dev-1002-gbfe5caf58f[0m
+[0;32mI (211) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (215) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (219) efuse_init: Chip rev:         v3.1[0m
+[0;32mI (223) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (229) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (234) heap_init: At 3FFB2EF8 len 0002D108 (180 KiB): DRAM[0m
+[0;32mI (240) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (245) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (251) heap_init: At 4008CFB8 len 00013048 (76 KiB): IRAM[0m
+[0;32mI (257) spi_flash: detected chip: generic[0m
+[0;32mI (259) spi_flash: flash io: dio[0m
+[0;33mW (262) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (275) main_task: Started on CPU0[0m
+[0;32mI (285) main_task: Calling app_main()[0m
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 61
+Temperature: --°C / --°F
+Humidity: --%
+---------------------------
+[DHT Task] Starting DHT11 sensor on GPIO 25
+[DHT Task] Waiting 2 seconds for sensor to stabilize...
+[0;32mI (295) main_task: Returned from app_main()[0m
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 61
+Temperature: --°C / --°F
+Humidity: --%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 59
+Temperature: --°C / --°F
+Humidity: --%
+---------------------------
+[DHT] Data bit high timeout
+[DHT Task] Failed to read DHT11 sensor (Success rate: 0/1)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 61
+Temperature: --°C / --°F
+Humidity: --%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 59
+Temperature: --°C / --°F
+Humidity: --%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 60
+Temperature: --°C / --°F
+Humidity: --%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 60
+Temperature: 24.3°C / 75.7°F
+Humidity: 61.2%
+---------------------------
+[DHT Task] Success! Temperature: 24.3°C (75.7°F), Humidity: 61.2% (Success rate: 1/2)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 59
+Temperature: 24.3°C / 75.7°F
+Humidity: 61.2%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 59
+Temperature: 24.3°C / 75.7°F
+Humidity: 61.2%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 61
+Temperature: 24.3°C / 75.7°F
+Humidity: 61.2%
+---------------------------
+[DHT] Data bit high timeout
+[DHT Task] Failed to read DHT11 sensor (Success rate: 1/3)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 55
+Temperature: --°C / --°F
+Humidity: --%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 60
+Temperature: --°C / --°F
+Humidity: --%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 60
+Temperature: --°C / --°F
+Humidity: --%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 60
+Temperature: 24.4°C / 75.9°F
+Humidity: 61.1%
+---------------------------
+[DHT Task] Success! Temperature: 24.4°C (75.9°F), Humidity: 61.1% (Success rate: 2/4)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 59
+Temperature: 24.4°C / 75.9°F
+Humidity: 61.1%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 59
+Temperature: 24.4°C / 75.9°F
+Humidity: 61.1%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 59
+Temperature: 24.4°C / 75.9°F
+Humidity: 61.1%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 59
+Temperature: 24.5°C / 76.1°F
+Humidity: 61.0%
+---------------------------
+[DHT Task] Success! Temperature: 24.5°C (76.1°F), Humidity: 61.0% (Success rate: 3/5)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 61
+Temperature: 24.5°C / 76.1°F
+Humidity: 61.0%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 61
+Temperature: 24.5°C / 76.1°F
+Humidity: 61.0%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 61.0%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.9%
+---------------------------
+[DHT Task] Success! Temperature: 24.5°C (76.1°F), Humidity: 60.9% (Success rate: 4/6)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.9%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.9%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.9%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.8%
+---------------------------
+[DHT Task] Success! Temperature: 24.5°C (76.1°F), Humidity: 60.8% (Success rate: 5/7)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.8%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.8%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.8%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.8%
+---------------------------
+[DHT Task] Success! Temperature: 24.5°C (76.1°F), Humidity: 60.8% (Success rate: 6/8)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.8%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.8%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.5°C / 76.1°F
+Humidity: 60.8%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 64
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[DHT Task] Success! Temperature: 24.6°C (76.3°F), Humidity: 60.6% (Success rate: 7/9)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 65
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 66
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 71
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 71
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[DHT Task] Success! Temperature: 24.6°C (76.3°F), Humidity: 60.6% (Success rate: 8/10)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 85
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 86
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 86
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 86
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[DHT Task] Success! Temperature: 24.6°C (76.3°F), Humidity: 60.6% (Success rate: 9/11)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 90
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 91
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 91
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 91
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[DHT Task] Success! Temperature: 24.6°C (76.3°F), Humidity: 60.6% (Success rate: 10/12)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 97
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 94
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 96
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.6%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 96
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.7%
+---------------------------
+[DHT Task] Success! Temperature: 24.6°C (76.3°F), Humidity: 60.7% (Success rate: 11/13)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 96
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 96
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 95
+Temperature: 24.6°C / 76.3°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 95
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[DHT Task] Success! Temperature: 24.7°C (76.5°F), Humidity: 60.7% (Success rate: 12/14)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 95
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 88
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 80
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 80
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[DHT Task] Success! Temperature: 24.7°C (76.5°F), Humidity: 60.7% (Success rate: 13/15)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 74
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 80
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 334
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 334
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.8%
+---------------------------
+[DHT Task] Success! Temperature: 24.7°C (76.5°F), Humidity: 60.8% (Success rate: 14/16)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 1153
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.8%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 1498
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.8%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 1446
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.8%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 1446
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[DHT Task] Success! Temperature: 24.7°C (76.5°F), Humidity: 60.7% (Success rate: 15/17)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 1328
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 1296
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 1305
+Temperature: 24.7°C / 76.5°F
+Humidity: 60.7%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 1305
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.5%
+---------------------------
+[DHT Task] Success! Temperature: 24.8°C (76.6°F), Humidity: 60.5% (Success rate: 16/18)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 1291
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.5%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 393
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.5%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 104
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.5%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 104
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.4%
+---------------------------
+[DHT Task] Success! Temperature: 24.8°C (76.6°F), Humidity: 60.4% (Success rate: 17/19)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 80
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.4%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 93
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.4%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 81
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.4%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 81
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.3%
+---------------------------
+[DHT Task] Success! Temperature: 24.8°C (76.6°F), Humidity: 60.3% (Success rate: 18/20)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 80
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.3%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 69
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.3%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 70
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.3%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 70
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.3%
+---------------------------
+[DHT Task] Success! Temperature: 24.8°C (76.6°F), Humidity: 60.3% (Success rate: 19/21)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 66
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.3%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 67
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.3%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 67
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.3%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 67
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.1%
+---------------------------
+[DHT Task] Success! Temperature: 24.8°C (76.6°F), Humidity: 60.1% (Success rate: 20/22)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 67
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.1%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 67
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.1%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 69
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.1%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 69
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.1%
+---------------------------
+[DHT Task] Success! Temperature: 24.8°C (76.6°F), Humidity: 60.1% (Success rate: 21/23)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 71
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.1%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 77
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.1%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 70
+Temperature: 24.8°C / 76.6°F
+Humidity: 60.1%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 70
+Temperature: 24.9°C / 76.8°F
+Humidity: 60.0%
+---------------------------
+[DHT Task] Success! Temperature: 24.9°C (76.8°F), Humidity: 60.0% (Success rate: 22/24)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 73
+Temperature: 24.9°C / 76.8°F
+Humidity: 60.0%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 78
+Temperature: 24.9°C / 76.8°F
+Humidity: 60.0%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 75
+Temperature: 24.9°C / 76.8°F
+Humidity: 60.0%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 75
+Temperature: 24.9°C / 76.8°F
+Humidity: 60.0%
+---------------------------
+[DHT Task] Success! Temperature: 24.9°C (76.8°F), Humidity: 60.0% (Success rate: 23/25)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 79
+Temperature: 24.9°C / 76.8°F
+Humidity: 60.0%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 79
+Temperature: 24.9°C / 76.8°F
+Humidity: 60.0%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 80
+Temperature: 24.9°C / 76.8°F
+Humidity: 60.0%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 80
+Temperature: 24.9°C / 76.8°F
+Humidity: 60.0%
+---------------------------
+[DHT Task] Success! Temperature: 24.9°C (76.8°F), Humidity: 60.0% (Success rate: 24/26)
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 80
+Temperature: 24.9°C / 76.8°F
+Humidity: 60.0%
+---------------------------
+[2J[H---------------------------
+[ Sensor Dashboard ]
+Light Level (ADC): 80
+Temperature: 24.9°C / 76.8°F
+Humidity: 60.0%
+---------------------------

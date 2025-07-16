@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/Users/emiliomontes/Desktop/Rtos/test_project/build/CMakeFiles/bootloader
+/Users/emiliomontes/Desktop/Rtos/test_project/build/CMakeFiles/bootloader.rule
+/Users/emiliomontes/Desktop/Rtos/test_project/build/CMakeFiles/bootloader-complete.rule
+/Users/emiliomontes/Desktop/Rtos/test_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/Users/emiliomontes/Desktop/Rtos/test_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/Users/emiliomontes/Desktop/Rtos/test_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/Users/emiliomontes/Desktop/Rtos/test_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/Users/emiliomontes/Desktop/Rtos/test_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/Users/emiliomontes/Desktop/Rtos/test_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/Users/emiliomontes/Desktop/Rtos/test_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

@@ -1,0 +1,2 @@
+source /Users/emiliomontes/Desktop/Rtos/test_project/build/bootloader/gdbinit/symbols
+source /Users/emiliomontes/Desktop/Rtos/test_project/build/bootloader/gdbinit/connect
